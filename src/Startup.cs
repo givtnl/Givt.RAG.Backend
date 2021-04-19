@@ -1,16 +1,9 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
 
 namespace backend
 {
@@ -28,9 +21,18 @@ namespace backend
         {
 
             services.AddControllers();
-            services.AddSwaggerGen(c =>
+            services.AddOpenApiDocument(options =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "backend", Version = "v1" });
+                options.Title = "Hackaton API";
+                options.AllowNullableBodyParameters = false;
+                options.DocumentName = "v1";
+                options.PostProcess = document =>
+                {
+                    document.Produces = new List<string>
+                    {
+                        "application/json"
+                    };
+                };
             });
         }
 
@@ -40,11 +42,9 @@ namespace backend
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "backend v1"));
+                app.UseOpenApi();
+                app.UseSwaggerUi3();
             }
-
-            app.UseHttpsRedirection();
 
             app.UseRouting();
 
