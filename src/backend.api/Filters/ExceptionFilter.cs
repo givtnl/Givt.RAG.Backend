@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 using System.Text.Json;
 using backend.business.Infrastructure;
 using Microsoft.AspNetCore.Http.Extensions;
@@ -48,6 +49,6 @@ namespace backend.Filters
         public string ErrorCode { get; set; }
         [NotNull]
         public string ErrorMessage { get; set; }
-        public object AdditionalInformation { get; set; }
+        public List<ValidationExceptionError> AdditionalInformation { get; set; }
     }
 }

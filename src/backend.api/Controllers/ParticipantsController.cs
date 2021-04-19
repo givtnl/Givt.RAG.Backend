@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using backend.business.Participants.Commands.Finish;
 using backend.business.Participants.Commands.Register;
+using backend.business.Participants.Commands.Start;
 using backend.business.Participants.Models;
 using backend.business.Participants.Queries.GetDetail;
 using backend.business.Participants.Queries.GetList;
@@ -45,6 +47,26 @@ namespace backend.Controllers
         public Task<ParticipantDetailModel> Get(string eventId, string id, CancellationToken cancellationToken)
         {
             return _mediatr.Send(new GetParticipantDetailQuery { EventId = eventId, Id = id }, cancellationToken);
+        }
+
+        [HttpPatch("{id}/start")]
+        [OpenApiOperation("StartEventForParticipant", "Updates the status for a given participant for a given event to Started")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ExceptionModel))]
+        public async Task<IActionResult> Start(string eventId, string id, CancellationToken cancellationToken)
+        {
+            await _mediatr.Send(new StartParticipantCommand{EventId = eventId, ParticipantId = id}, cancellationToken);
+            return NoContent();
+        }
+
+        [HttpPatch("{id}/finish")]
+        [OpenApiOperation("FinishEventForParticipant", "Updates the status for a given participant for a given event to Finished")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ExceptionModel))]
+        public async Task<IActionResult> Finish(string eventId, string id, CancellationToken cancellationToken)
+        {
+            await _mediatr.Send(new FinishParticipantCommand { EventId = eventId, ParticipantId = id }, cancellationToken);
+            return NoContent();
         }
     }
 }

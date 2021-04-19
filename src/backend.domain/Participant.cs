@@ -11,13 +11,15 @@ namespace backend.domain
         [DynamoDBRangeKey]
         public string Id { get; set; }
         public string Name { get; set; }
+        public string Status { get; set; }
         public static Participant BuildParticipantForEvent(string eventId, string name)
         {
             return new()
             {
                 DomainType = nameof(Participant),
                 Name = name,
-                Id = $"{eventId}-{DateTime.Now.Ticks}"
+                Status = ParticipantStatus.Registered,
+                Id = $"{eventId}-{DateTime.UtcNow.Ticks}"
             };
         }
     }

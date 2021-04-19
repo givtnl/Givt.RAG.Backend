@@ -30,7 +30,7 @@ namespace backend.business.Infrastructure
             {
                 Errors = failures
                     .GroupBy(x => x.PropertyName)
-                    .ToDictionary(x => x.Key, x => x.FirstOrDefault()?.ErrorMessage)
+                    .Select(x => new ValidationExceptionError{ErrorMessage = x.FirstOrDefault()?.ErrorMessage, Property = x.Key}).ToList()
             };
 
             throw toThrowException;
