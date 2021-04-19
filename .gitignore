@@ -1,2 +1,7 @@
 src/obj/
 src/bin/
+src/backend.business/obj/
+src/backend.api/obj/
+src/backend.api/bin/
+src/backend.domain/obj/
+src/backend.domain/bin/
