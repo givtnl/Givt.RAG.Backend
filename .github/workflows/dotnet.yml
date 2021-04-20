@@ -24,7 +24,7 @@ jobs:
 #     - name: Test
 #       run: dotnet test --no-build --verbosity normal
     - name: Build
-      run: dotnet publish --no-restore -r linux-x64 -f net5.0 -c Release -o $(pwd)/publish $PROJECT
+      run: dotnet publish --no-restore -c Release -o $(pwd)/publish $PROJECT
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
     - name: Set up Docker Buildx
