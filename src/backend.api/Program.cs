@@ -13,6 +13,12 @@ namespace backend
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+            .ConfigureAppConfiguration((hostBuilder, configBuilder) =>
+            {
+                configBuilder.AddJsonFile("appsettings.json");
+                configBuilder.AddJsonFile($"appsettings.{hostBuilder.HostingEnvironment.EnvironmentName}.json");
+                configBuilder.AddEnvironmentVariables();
+            })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
