@@ -6,6 +6,7 @@ using backend.business.Events.Mappers;
 using backend.business.Infrastructure;
 using backend.business.Participants.Commands.Register;
 using backend.Filters;
+using backend.tasks;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -28,7 +29,7 @@ namespace backend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddHostedService<ProcessFinishedParticipantsQueueHandler>();
             services.AddControllers();
             services.AddMvc(x => x.Filters.Add<ExceptionFilter>());
 

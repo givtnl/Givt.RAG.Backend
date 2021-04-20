@@ -10,3 +10,5 @@ src/backend.infrastructure.aws/bin/
 src/backend.infrastructure.aws/cdk.out/
 .vs/
 src/backend.api/appsettings.Development.json
+src/backend.tasks/obj/
+src/backend.tasks/bin/

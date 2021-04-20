@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "backend.domain", "src\backe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "backend.infrastructure.aws", "src\backend.infrastructure.aws\backend.infrastructure.aws.csproj", "{8BE353DB-0081-4739-93E5-909C9376CCEB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "backend.tasks", "src\backend.tasks\backend.tasks.csproj", "{D2D2D578-CAC8-4970-A06E-82121E3C3B6A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{8BE353DB-0081-4739-93E5-909C9376CCEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BE353DB-0081-4739-93E5-909C9376CCEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BE353DB-0081-4739-93E5-909C9376CCEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2D2D578-CAC8-4970-A06E-82121E3C3B6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2D2D578-CAC8-4970-A06E-82121E3C3B6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2D2D578-CAC8-4970-A06E-82121E3C3B6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2D2D578-CAC8-4970-A06E-82121E3C3B6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
