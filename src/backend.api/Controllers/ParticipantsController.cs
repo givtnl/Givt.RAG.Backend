@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using backend.business.Backers.Commands.Notify;
+using backend.business.Backers.Queries.GetList;
+using backend.business.Events.Queries.GetDetail;
 using backend.business.Participants.Commands.Finish;
 using backend.business.Participants.Commands.Register;
 using backend.business.Participants.Commands.Start;
@@ -35,11 +38,11 @@ namespace backend.Controllers
         [OpenApiOperation("RegisterParticipant", "Registers a participant for a given event")]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ParticipantDetailModel))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ExceptionModel))]
-        public async Task<IActionResult> Post(string eventId,[FromBody]RegisterParticipantCommand command, CancellationToken cancellationToken)
+        public async Task<IActionResult> Post(string eventId, [FromBody] RegisterParticipantCommand command, CancellationToken cancellationToken)
         {
             command.EventId = eventId;
             var createdParticipant = await _mediatr.Send(command, cancellationToken);
-            return CreatedAtAction(nameof(Get), new {eventId, createdParticipant.Id}, createdParticipant);
+            return CreatedAtAction(nameof(Get), new { eventId, createdParticipant.Id }, createdParticipant);
         }
 
         [HttpGet("{id}")]
@@ -55,7 +58,7 @@ namespace backend.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ExceptionModel))]
         public async Task<IActionResult> Start(string eventId, string id, CancellationToken cancellationToken)
         {
-            await _mediatr.Send(new StartParticipantCommand{EventId = eventId, ParticipantId = id}, cancellationToken);
+            await _mediatr.Send(new StartParticipantCommand { EventId = eventId, ParticipantId = id }, cancellationToken);
             return NoContent();
         }
 
@@ -66,6 +69,12 @@ namespace backend.Controllers
         public async Task<IActionResult> Finish(string eventId, string id, CancellationToken cancellationToken)
         {
             await _mediatr.Send(new FinishParticipantCommand { EventId = eventId, ParticipantId = id }, cancellationToken);
+            await _mediatr.Send(new NotifyBackersCommand
+            {
+                Participant = await _mediatr.Send(new GetParticipantDetailQuery { EventId = eventId, Id = id }, cancellationToken),
+                Backers = await _mediatr.Send(new GetBackersListQuery { EventId = eventId, ParticipantId = id }, cancellationToken),
+                Event = await _mediatr.Send(new GetEventDetailQuery { Id = eventId }, cancellationToken)
+            }, cancellationToken);
             return NoContent();
         }
     }

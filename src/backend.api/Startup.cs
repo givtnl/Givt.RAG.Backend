@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Amazon.DynamoDBv2;
+using Amazon.SQS;
 using backend.business.Backers.Queries.GetList;
 using backend.business.Events.Mappers;
 using backend.business.Infrastructure;
@@ -31,9 +32,10 @@ namespace backend
             services.AddControllers();
             services.AddMvc(x => x.Filters.Add<ExceptionFilter>());
 
-
+            services.AddSingleton(Configuration.GetSection(nameof(ApplicationSettings)).Get<ApplicationSettings>());
             services.AddDefaultAWSOptions(Configuration.GetAWSOptions());
             services.AddAWSService<IAmazonDynamoDB>();
+            services.AddAWSService<IAmazonSQS>();
             services.AddAutoMapper(x => x.AddMaps(typeof(EventMapper).Assembly));
             
             // I dont think you can change the order in this one

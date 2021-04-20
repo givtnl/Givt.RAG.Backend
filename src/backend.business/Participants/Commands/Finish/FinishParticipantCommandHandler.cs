@@ -24,6 +24,7 @@ namespace backend.business.Participants.Commands.Finish
             {
                 ConsistentRead = true
             }, cancellationToken);
+
             if (participant == null)
                 throw new NotFoundException();
 

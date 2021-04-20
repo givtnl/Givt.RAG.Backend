@@ -5,3 +5,7 @@ src/backend.api/obj/
 src/backend.api/bin/
 src/backend.domain/obj/
 src/backend.domain/bin/
+src/backend.infrastructure.aws/obj/
+src/backend.infrastructure.aws/bin/
+src/backend.infrastructure.aws/cdk.out/
+.vs/
