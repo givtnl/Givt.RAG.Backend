@@ -40,3 +40,12 @@ jobs:
         context: .
         push: true
         tags: givt/givt-rag-api:main
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - name: Azure CLI script
+      uses: azure/CLI@v1
+      with:
+        inlineScript: |
+          az container restart --name givt-debug-rag-backend --resource-group givt-debug-rag
