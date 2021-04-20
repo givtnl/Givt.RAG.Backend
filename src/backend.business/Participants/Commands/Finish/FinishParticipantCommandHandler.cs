@@ -33,6 +33,7 @@ namespace backend.business.Participants.Commands.Finish
 
             participant.Status = ParticipantStatus.Finished;
             participant.FinishDate = DateTime.UtcNow;
+            participant.DistanceInMeters = request.DistanceInMeters;
 
             await context.SaveAsync(participant, cancellationToken);
 

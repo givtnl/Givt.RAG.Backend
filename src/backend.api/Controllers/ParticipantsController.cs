@@ -67,9 +67,11 @@ namespace backend.Controllers
         [OpenApiOperation("FinishEventForParticipant", "Updates the status for a given participant for a given event to Finished")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ExceptionModel))]
-        public async Task<IActionResult> Finish([NotNull] string eventId, [NotNull] string id, CancellationToken cancellationToken)
+        public async Task<IActionResult> Finish([NotNull] string eventId, [NotNull] string id,[FromBody] FinishParticipantCommand command, CancellationToken cancellationToken)
         {
-            await _mediatr.Send(new FinishParticipantCommand { EventId = eventId, ParticipantId = id }, cancellationToken);
+            command.EventId = eventId;
+            command.ParticipantId = id;
+            await _mediatr.Send(command, cancellationToken);
             await _mediatr.Send(new NotifyBackersCommand
             {
                 Participant = await _mediatr.Send(new GetParticipantDetailQuery { EventId = eventId, Id = id }, cancellationToken),

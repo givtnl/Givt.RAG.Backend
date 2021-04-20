@@ -17,6 +17,7 @@ namespace backend.domain
         public DateTime? StartDate { get; set; }
         [DynamoDBProperty(typeof(DynamoNullableDateTimeConverter))]
         public DateTime? FinishDate { get; set; }
+        public decimal? DistanceInMeters { get; set; }
         public static Participant BuildParticipantForEvent(string eventId, string name)
         {
             return new()

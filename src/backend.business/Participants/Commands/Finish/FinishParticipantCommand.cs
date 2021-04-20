@@ -10,8 +10,12 @@ namespace backend.business.Participants.Commands.Finish
     public class FinishParticipantCommand : IRequest
     {
         [NotNull]
+        [JsonSchemaIgnore]
         public string EventId { get; set; }
         [NotNull]
+        [JsonSchemaIgnore]
         public string ParticipantId { get; set; }
+        [NotNull]
+        public decimal DistanceInMeters { get; set; }
     }
 }

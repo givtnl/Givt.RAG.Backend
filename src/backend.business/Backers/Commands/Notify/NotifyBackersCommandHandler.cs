@@ -38,6 +38,8 @@ namespace backend.business.Backers.Commands.Notify
                         Id = x.Id,
                         MessageBody = JsonSerializer.Serialize(new NotifyBackersMessage
                         {
+                            Duration = new NotifyBackersMessageDuration(request.Participant.FinishDate!.Value! - request.Participant.StartDate!.Value),
+                            Distance = new NotifyBackersMessageDistance(request.Participant.DistanceInMeters!.Value),
                             Participant = request.Participant,
                             Event = request.Event,
                             Backer = x
