@@ -28,6 +28,9 @@ namespace backend.business.Participants.Commands.Finish
             if (participant == null)
                 throw new NotFoundException();
 
+            if (participant.Status == ParticipantStatus.Finished)
+                throw new ValidationException(nameof(Participant.Status), $"Wrong desired status ({ParticipantStatus.Finished})");
+
             participant.Status = ParticipantStatus.Finished;
             participant.FinishDate = DateTime.UtcNow;
 

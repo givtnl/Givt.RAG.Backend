@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v5.0": {
       "backend.business/1.0.0": {
         "dependencies": {
+          "AWSSDK.SQS": "3.7.0.14",
           "AutoMapper": "10.1.1",
           "FluentValidation": "10.0.4",
           "MediatR": "9.0.0",
@@ -30,22 +31,33 @@
           }
         }
       },
-      "AWSSDK.Core/3.7.0.13": {
+      "AWSSDK.Core/3.7.0.14": {
         "runtime": {
           "lib/netcoreapp3.1/AWSSDK.Core.dll": {
             "assemblyVersion": "3.3.0.0",
-            "fileVersion": "3.7.0.13"
+            "fileVersion": "3.7.0.14"
           }
         }
       },
       "AWSSDK.DynamoDBv2/3.7.0.13": {
         "dependencies": {
-          "AWSSDK.Core": "3.7.0.13"
+          "AWSSDK.Core": "3.7.0.14"
         },
         "runtime": {
           "lib/netcoreapp3.1/AWSSDK.DynamoDBv2.dll": {
             "assemblyVersion": "3.3.0.0",
             "fileVersion": "3.7.0.13"
+          }
+        }
+      },
+      "AWSSDK.SQS/3.7.0.14": {
+        "dependencies": {
+          "AWSSDK.Core": "3.7.0.14"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/AWSSDK.SQS.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.0.14"
           }
         }
       },
@@ -1307,12 +1319,12 @@
       "path": "automapper/10.1.1",
       "hashPath": "automapper.10.1.1.nupkg.sha512"
     },
-    "AWSSDK.Core/3.7.0.13": {
+    "AWSSDK.Core/3.7.0.14": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-8z7RHLvY/bQP3F55AL3keG3/6Y9O15RWFUhz1a585+UAFVvFD/eejn443s4C0O3k5TLnxf1u5M0qblIZbNMgqw==",
-      "path": "awssdk.core/3.7.0.13",
-      "hashPath": "awssdk.core.3.7.0.13.nupkg.sha512"
+      "sha512": "sha512-n9V+mwRStMzXl/GnD+J0uwnySMUB/Ug+yJ0G2B4XBQZYIegWWfqeQT2KqaP4hI08L49vY6JDIWIKEW4sNidNEg==",
+      "path": "awssdk.core/3.7.0.14",
+      "hashPath": "awssdk.core.3.7.0.14.nupkg.sha512"
     },
     "AWSSDK.DynamoDBv2/3.7.0.13": {
       "type": "package",
@@ -1320,6 +1332,13 @@
       "sha512": "sha512-dqhGnZ9Wf6LNKaDey4HCMguFjH3XQiEBRH3Sij8CA/Qby8K0f5RiQKCwrnnbHUAhbha7zA62NMPFiB7pCIwuQA==",
       "path": "awssdk.dynamodbv2/3.7.0.13",
       "hashPath": "awssdk.dynamodbv2.3.7.0.13.nupkg.sha512"
+    },
+    "AWSSDK.SQS/3.7.0.14": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-HYmOKA7/bKMuzvAiBUVUjj4Ar0KLwiioiyjy8BIMnZSRUWzUkraQQUuRVLFK6rtx6j2KxM5TUblWsgVxt8ekyw==",
+      "path": "awssdk.sqs/3.7.0.14",
+      "hashPath": "awssdk.sqs.3.7.0.14.nupkg.sha512"
     },
     "FluentValidation/10.0.4": {
       "type": "package",

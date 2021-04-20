@@ -14,6 +14,7 @@ using backend.Filters;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NJsonSchema.Annotations;
 using NSwag.Annotations;
 
 namespace backend.Controllers
@@ -30,7 +31,7 @@ namespace backend.Controllers
         }
         [HttpGet]
         [OpenApiOperation("GetParticipantsList", "Returns a list of participants for a given event")]
-        public Task<IEnumerable<ParticipantListModel>> Get(string eventId, CancellationToken cancellationToken)
+        public Task<IEnumerable<ParticipantListModel>> Get([NotNull] string eventId, CancellationToken cancellationToken)
         {
             return _mediatr.Send(new GetParticipantsListQuery { EventId = eventId }, cancellationToken);
         }
@@ -38,7 +39,7 @@ namespace backend.Controllers
         [OpenApiOperation("RegisterParticipant", "Registers a participant for a given event")]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ParticipantDetailModel))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ExceptionModel))]
-        public async Task<IActionResult> Post(string eventId, [FromBody] RegisterParticipantCommand command, CancellationToken cancellationToken)
+        public async Task<IActionResult> Post([NotNull] string eventId, [FromBody] RegisterParticipantCommand command, CancellationToken cancellationToken)
         {
             command.EventId = eventId;
             var createdParticipant = await _mediatr.Send(command, cancellationToken);
@@ -47,7 +48,7 @@ namespace backend.Controllers
 
         [HttpGet("{id}")]
         [OpenApiOperation("GetParticipantDetail", "Returns the detail of a participant for a given event")]
-        public Task<ParticipantDetailModel> Get(string eventId, string id, CancellationToken cancellationToken)
+        public Task<ParticipantDetailModel> Get([NotNull] string eventId, string id, CancellationToken cancellationToken)
         {
             return _mediatr.Send(new GetParticipantDetailQuery { EventId = eventId, Id = id }, cancellationToken);
         }
@@ -56,7 +57,7 @@ namespace backend.Controllers
         [OpenApiOperation("StartEventForParticipant", "Updates the status for a given participant for a given event to Started")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ExceptionModel))]
-        public async Task<IActionResult> Start(string eventId, string id, CancellationToken cancellationToken)
+        public async Task<IActionResult> Start([NotNull] string eventId, [NotNull] string id, CancellationToken cancellationToken)
         {
             await _mediatr.Send(new StartParticipantCommand { EventId = eventId, ParticipantId = id }, cancellationToken);
             return NoContent();
@@ -66,7 +67,7 @@ namespace backend.Controllers
         [OpenApiOperation("FinishEventForParticipant", "Updates the status for a given participant for a given event to Finished")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ExceptionModel))]
-        public async Task<IActionResult> Finish(string eventId, string id, CancellationToken cancellationToken)
+        public async Task<IActionResult> Finish([NotNull] string eventId, [NotNull] string id, CancellationToken cancellationToken)
         {
             await _mediatr.Send(new FinishParticipantCommand { EventId = eventId, ParticipantId = id }, cancellationToken);
             await _mediatr.Send(new NotifyBackersCommand
@@ -74,7 +75,7 @@ namespace backend.Controllers
                 Participant = await _mediatr.Send(new GetParticipantDetailQuery { EventId = eventId, Id = id }, cancellationToken),
                 Backers = await _mediatr.Send(new GetBackersListQuery { EventId = eventId, ParticipantId = id }, cancellationToken),
                 Event = await _mediatr.Send(new GetEventDetailQuery { Id = eventId }, cancellationToken)
-            }, cancellationToken);
+            }, cancellationToken); 
             return NoContent();
         }
     }

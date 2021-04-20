@@ -8,5 +8,7 @@ namespace backend.business.Backers.Models
         public string Id { get; set; }
         [NotNull]
         public string Name { get; set; }
+        [NotNull]
+        public string EmailAddress { get; set; }
     }
 }

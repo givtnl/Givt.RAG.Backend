@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Backers\Mappers\" />
     <Folder Include="Events\Commands\Update\" />
     <Folder Include="Participants\Queries\GetList\" />
   </ItemGroup>

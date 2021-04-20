@@ -1,7 +1,6 @@
 ﻿using backend.business.Participants.Models;
 using MediatR;
 using NJsonSchema.Annotations;
-using NSwag.Annotations;
 
 namespace backend.business.Participants.Commands.Register
 {
@@ -11,7 +10,7 @@ namespace backend.business.Participants.Commands.Register
     public class RegisterParticipantCommand : IRequest<ParticipantDetailModel>
     {
         [NotNull]
-        [OpenApiIgnore]
+        [JsonSchemaIgnore]
         public string EventId { get; set; }
         [NotNull]
         public string Name { get; set; }

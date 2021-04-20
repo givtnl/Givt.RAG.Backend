@@ -34,7 +34,7 @@ namespace backend.business.Events.Queries.GetList
                 KeyExpression = new Expression
                 {
                     ExpressionStatement = "Id > :id AND DomainType = :domainType",
-                    ExpressionAttributeValues = new Dictionary<string, DynamoDBEntry> { { ":id", new Primitive("0", true) }, { ":domainType", new Primitive(nameof(Event)) } }
+                    ExpressionAttributeValues = new Dictionary<string, DynamoDBEntry> { { ":id", new Primitive("0") }, { ":domainType", new Primitive(nameof(Event)) } }
                 }
             });
             results.AddRange(await response.GetRemainingAsync(cancellationToken));

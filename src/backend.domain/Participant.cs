@@ -1,5 +1,6 @@
 ﻿using System;
 using Amazon.DynamoDBv2.DataModel;
+using backend.domain.Converters;
 
 namespace backend.domain
 {
@@ -12,7 +13,9 @@ namespace backend.domain
         public string Id { get; set; }
         public string Name { get; set; }
         public string Status { get; set; }
+        [DynamoDBProperty(typeof(DynamoNullableDateTimeConverter))]
         public DateTime? StartDate { get; set; }
+        [DynamoDBProperty(typeof(DynamoNullableDateTimeConverter))]
         public DateTime? FinishDate { get; set; }
         public static Participant BuildParticipantForEvent(string eventId, string name)
         {

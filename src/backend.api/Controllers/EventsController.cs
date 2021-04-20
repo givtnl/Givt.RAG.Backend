@@ -6,6 +6,7 @@ using backend.business.Events.Queries.GetDetail;
 using backend.business.Events.Queries.GetList;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using NJsonSchema.Annotations;
 using NSwag.Annotations;
 
 namespace backend.Controllers
@@ -29,7 +30,7 @@ namespace backend.Controllers
 
         [HttpGet("{id}")]
         [OpenApiOperation("GetEventDetail", "Returns the details for a specific event")]
-        public Task<EventDetailModel> Get(string id, CancellationToken cancellationToken)
+        public Task<EventDetailModel> Get([NotNull] string id, CancellationToken cancellationToken)
         {
             return _mediatr.Send(new GetEventDetailQuery {Id = id}, cancellationToken);
         }
