@@ -1,28 +1,30 @@
 name: .NET
 
 on:
-  push:
-    branches: [  ]
-  pull_request:
-    branches: [  ]
-
+#   push:
+#     branches: [ master ]
+#   pull_request:
+#     branches: [  ]
+  workflow_dispatch:
+  
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
+    env:
+      PROJECT: ./src/backend.api/backend.csproj
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v2
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore $PROJECT
+#     - name: Test
+#       run: dotnet test --no-build --verbosity normal
     - name: Build
-      run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet publish --no-restore -r linux-x64 -f net5.0 -c Release -o $(pwd)/publish $PROJECT
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
     - name: Set up Docker Buildx
@@ -37,4 +39,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: user/app:latest
+        tags: givt/givt-rag-api:main
