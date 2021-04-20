@@ -48,7 +48,7 @@ namespace backend.tasks
                     WaitTimeSeconds = 20
                 };
                 var queueResponse = await _sqsService.ReceiveMessageAsync(receiveMessageRequest, stoppingToken);
-                if (queueResponse.Messages.Any())
+                if (!queueResponse.Messages.Any())
                     continue;
 
                 try
