@@ -20,6 +20,8 @@ namespace backend.Filters
         }
         public void OnException(ExceptionContext context)
         {
+            context.HttpContext.Response.ContentType = "application/json";
+            context.HttpContext.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
             var model = new ExceptionModel
             {
                 ErrorCode = (HttpStatusCode.InternalServerError).ToString(),
@@ -29,6 +31,7 @@ namespace backend.Filters
             {
                 model.ErrorCode = (HttpStatusCode.BadRequest).ToString();
                 model.AdditionalInformation = validateException.Errors;
+                context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
             }
             else
             {
