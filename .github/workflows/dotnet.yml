@@ -48,4 +48,5 @@ jobs:
       uses: azure/CLI@v1
       with:
         inlineScript: |
+          az account set -s 2a3aee87-edae-4b99-bd95-8f57e5c58a97
           az container restart --name givt-debug-rag-backend --resource-group givt-debug-rag
