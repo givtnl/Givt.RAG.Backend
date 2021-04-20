@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
@@ -27,6 +28,8 @@ namespace backend.business.Participants.Commands.Finish
                 throw new NotFoundException();
 
             participant.Status = ParticipantStatus.Finished;
+            participant.FinishDate = DateTime.UtcNow;
+
             await context.SaveAsync(participant, cancellationToken);
 
             return Unit.Value;

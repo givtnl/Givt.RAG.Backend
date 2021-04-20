@@ -12,6 +12,8 @@ namespace backend.domain
         public string Id { get; set; }
         public string Name { get; set; }
         public string Status { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? FinishDate { get; set; }
         public static Participant BuildParticipantForEvent(string eventId, string name)
         {
             return new()
