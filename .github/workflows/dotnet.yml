@@ -45,8 +45,14 @@ jobs:
     - name: Azure login
       env:
         AZURE_PRINCIPAL_SECRET_DEV: ${{ secrets.AZURE_PRINCIPAL_SECRET_DEV }}
-      run: az login --service-principal --tenant 06b7c88c-86d5-413f-8ca3-129402419237 -u 88015dd8-4087-4c6c-9a8c-ec93e2c93571 -p ${AZURE_PRINCIPAL_SECRET_DEV}
-    - name: Restart Azure container
+        TENANT_ID: 06b7c88c-86d5-413f-8ca3-129402419237
+        CLIENT_ID: 88015dd8-4087-4c6c-9a8c-ec93e2c93571
+        SUBSCRIPTION_ID: 2a3aee87-edae-4b99-bd95-8f57e5c58a97
       run: |
-        az account set -s 2a3aee87-edae-4b99-bd95-8f57e5c58a97 
-        az container restart --name givt-debug-rag-backend --resource-group givt-debug-rag
+        az login --service-principal --tenant ${TENANT_ID} -u ${CLIENT_ID} -p ${AZURE_PRINCIPAL_SECRET_DEV}
+        az account set -s ${SUBSCRIPTION_ID}
+    - name: Restart Azure container
+      env:
+        CONTAINER_NAME: givt-debug-rag-backend
+        RESOURCE_GROUP: givt-debug-rag
+      run: az container restart --name ${CONTAINER_NAME} --resource-group ${RESOURCE_GROUP}
