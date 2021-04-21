@@ -15,14 +15,13 @@ namespace backend
             Host.CreateDefaultBuilder(args)
             .ConfigureAppConfiguration((hostBuilder, configBuilder) =>
             {
-                configBuilder.AddJsonFile("appsettings.json");
-                configBuilder.AddJsonFile($"appsettings.{hostBuilder.HostingEnvironment.EnvironmentName}.json");
+                configBuilder.AddJsonFile("appsettings.json", true);
+                configBuilder.AddJsonFile($"appsettings.{hostBuilder.HostingEnvironment.EnvironmentName}.json", true);
                 configBuilder.AddEnvironmentVariables();
             })
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
-
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+            });
     }
 }
