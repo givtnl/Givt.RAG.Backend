@@ -37,7 +37,8 @@ namespace backend.business.Backers.Messages
         public double Hours { get; set; }
         public double Minutes { get; set; }
         public double Seconds { get; set; }
-
+        
+        public string FormattedTime {get; set;}
         public NotifyBackersMessageDuration()
         {
             
@@ -48,6 +49,8 @@ namespace backend.business.Backers.Messages
             Hours = Math.Round(duration.TotalHours,2);
             Minutes = Math.Round(duration.TotalMinutes,2);
             Seconds = duration.TotalSeconds;
+            FormattedTime = duration.ToString("hh\\:mm\\:ss");
         }
+
     }
 }
