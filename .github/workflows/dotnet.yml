@@ -42,7 +42,7 @@ jobs:
         tags: givt/givt-rag-api:main
     - name: Azure CLI Install
       run: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-    - name: Azure login and restart container
+    - name: Azure login
       env:
         AZURE_PRINCIPAL_SECRET_DEV: ${{ secrets.AZURE_PRINCIPAL_SECRET_DEV }}
         TENANT_ID: 06b7c88c-86d5-413f-8ca3-129402419237
