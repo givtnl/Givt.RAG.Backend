@@ -31,7 +31,7 @@ namespace backend
         {
             services.AddHostedService<ProcessFinishedParticipantsQueueHandler>();
             services.AddControllers();
-            services.AddMvc(x => x.Filters.Add<ExceptionFilter>());
+            services.AddMvcCore(x => x.Filters.Add<ExceptionFilter>());
 
             services.AddSingleton(Configuration.GetSection(nameof(ApplicationSettings)).Get<ApplicationSettings>());
             services.AddDefaultAWSOptions(Configuration.GetAWSOptions());
@@ -70,9 +70,9 @@ namespace backend
                 app.UseSwaggerUi3();
             }
 
-            app.UseRouting();
-
-            app.UseAuthorization();
+            app.UseRouting()
+                .UseCors("EnableAll")
+                .UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
