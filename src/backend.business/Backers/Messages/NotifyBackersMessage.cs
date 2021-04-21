@@ -12,6 +12,7 @@ namespace backend.business.Backers.Messages
         public EventDetailModel Event { get; set; }
         public NotifyBackersMessageDistance Distance { get; set; }
         public NotifyBackersMessageDuration Duration { get; set; }
+        public decimal TotalAmount => decimal.Round(Distance.Kilometers * Backer.Amount,2);
     }
 
     public class NotifyBackersMessageDistance

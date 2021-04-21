@@ -29,7 +29,7 @@ namespace backend.business.Backers.Queries.GetList
             using var context = new DynamoDBContext(_dynamoDb);
             var response = context.FromQueryAsync<Backer>(new QueryOperationConfig
             {
-                AttributesToGet = new List<string> { nameof(Backer.Id), nameof(Backer.Name), nameof(Backer.EmailAddress) },
+                AttributesToGet = new List<string> { nameof(Backer.Id), nameof(Backer.Name), nameof(Backer.EmailAddress), nameof (Backer.Amount) },
                 Select = SelectValues.SpecificAttributes,
                 KeyExpression = new Expression
                 {

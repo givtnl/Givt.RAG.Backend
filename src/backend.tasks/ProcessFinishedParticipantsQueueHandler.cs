@@ -38,6 +38,12 @@ namespace backend.tasks
                 _logger.LogWarning("No queue url found, aborting listening to messages");
                 return;
             }
+         if (string.IsNullOrWhiteSpace(_configuration["PostMark:ApiKey"]))
+            {
+                _logger.LogWarning("No postman apikey aborting listening to messages");
+                return;
+            }
+
 
             _logger.LogDebug("Listening to messages");
 
