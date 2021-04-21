@@ -38,7 +38,7 @@ namespace backend
             services.AddAWSService<IAmazonDynamoDB>();
             services.AddAWSService<IAmazonSQS>();
             services.AddAutoMapper(x => x.AddMaps(typeof(EventMapper).Assembly));
-            
+
             // I dont think you can change the order in this one
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(HackatonPipelineBehavior<,>));
             services.AddMediatR(typeof(GetBackersListQuery).Assembly);
@@ -58,6 +58,12 @@ namespace backend
                     };
                 };
             });
+            services.AddCors(o => o.AddPolicy("EnableAll", builder =>
+            {
+                builder.AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowAnyOrigin();
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
