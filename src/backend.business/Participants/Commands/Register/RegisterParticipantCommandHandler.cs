@@ -22,7 +22,7 @@ namespace backend.business.Participants.Commands.Register
         public async Task<ParticipantDetailModel> Handle(RegisterParticipantCommand request, CancellationToken cancellationToken)
         {
             using var context = new DynamoDBContext(_dynamoDb);
-            var toInsertParticipant = Participant.BuildParticipantForEvent(request.EventId, request.Name);
+            var toInsertParticipant = _mapper.Map(request, new Participant());
             await context.SaveAsync(toInsertParticipant, cancellationToken);
             return _mapper.Map(toInsertParticipant, new ParticipantDetailModel());
         }

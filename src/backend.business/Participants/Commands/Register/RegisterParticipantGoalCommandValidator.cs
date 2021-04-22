@@ -6,7 +6,6 @@ namespace backend.business.Participants.Commands.Register
     {
         public RegisterParticipantGoalCommandValidator()
         {
-            RuleFor(x => x.Type).NotEmpty();
             RuleFor(x => x.Value).NotEmpty();
         }
     }

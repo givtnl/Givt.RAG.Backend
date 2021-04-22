@@ -24,16 +24,6 @@ namespace backend.domain
         [DynamoDBProperty(typeof(DynamoNullableDateTimeConverter))]
         public DateTime? FinishDate { get; set; }
         public decimal? DistanceInMeters { get; set; }
-        public List<ParticipantGoal> Goals { get; set; } 
-        public static Participant BuildParticipantForEvent(string eventId, string name)
-        {
-            return new()
-            {
-                DomainType = nameof(Participant),
-                Name = name,
-                Status = ParticipantStatus.Registered,
-                Id = $"{eventId}-{DateTime.UtcNow.Ticks}"
-            };
-        }
+        public List<ParticipantGoal> Goals { get; set; }
     }
 }
