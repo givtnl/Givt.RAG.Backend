@@ -29,7 +29,7 @@ namespace backend.business.Events.Queries.GetList
             using var context = new DynamoDBContext(_dynamoDb);
             var response = context.FromQueryAsync<Event>(new QueryOperationConfig
             {
-                AttributesToGet = new List<string> { nameof(Event.Id), nameof(Event.Name) },
+                AttributesToGet = new List<string> { nameof(Event.Id), nameof(Event.Name), nameof(Event.StartDate), nameof(Event.City) },
                 Select = SelectValues.SpecificAttributes,
                 KeyExpression = new Expression
                 {
