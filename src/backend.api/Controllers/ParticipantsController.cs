@@ -30,13 +30,13 @@ namespace backend.Controllers
             _mediatr = mediatr;
         }
         [HttpGet]
-        [OpenApiOperation("GetParticipantsList", "Returns a list of participants for a given event")]
+        [OpenApiOperation("GetParticipantsList")]
         public Task<IEnumerable<ParticipantListModel>> Get([NotNull] string eventId, CancellationToken cancellationToken)
         {
             return _mediatr.Send(new GetParticipantsListQuery { EventId = eventId }, cancellationToken);
         }
         [HttpPost]
-        [OpenApiOperation("RegisterParticipant", "Registers a participant for a given event")]
+        [OpenApiOperation("RegisterParticipant")]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ParticipantDetailModel))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ExceptionModel))]
         public async Task<IActionResult> Post([NotNull] string eventId, [FromBody] RegisterParticipantCommand command, CancellationToken cancellationToken)
@@ -47,14 +47,14 @@ namespace backend.Controllers
         }
 
         [HttpGet("{id}")]
-        [OpenApiOperation("GetParticipantDetail", "Returns the detail of a participant for a given event")]
+        [OpenApiOperation("GetParticipantDetail")]
         public Task<ParticipantDetailModel> Get([NotNull] string eventId, string id, CancellationToken cancellationToken)
         {
             return _mediatr.Send(new GetParticipantDetailQuery { EventId = eventId, Id = id }, cancellationToken);
         }
 
         [HttpPatch("{id}/start")]
-        [OpenApiOperation("StartEventForParticipant", "Updates the status for a given participant for a given event to Started")]
+        [OpenApiOperation("StartEventForParticipant")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ExceptionModel))]
         public async Task<IActionResult> Start([NotNull] string eventId, [NotNull] string id, CancellationToken cancellationToken)
