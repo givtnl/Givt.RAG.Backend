@@ -47,11 +47,13 @@ namespace backend
 
             services.AddOpenApiDocument(options =>
             {
+                options.GenerateEnumMappingDescription = true;
                 options.Title = "Gehaktaton API";
                 options.AllowNullableBodyParameters = false;
                 options.DocumentName = "v1";
                 options.PostProcess = document =>
                 {
+          
                     document.Produces = new List<string>
                     {
                         "application/json"

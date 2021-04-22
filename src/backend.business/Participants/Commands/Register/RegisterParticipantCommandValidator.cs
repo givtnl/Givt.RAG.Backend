@@ -8,6 +8,7 @@ namespace backend.business.Participants.Commands.Register
         {
             RuleFor(x => x.EventId).NotEmpty();
             RuleFor(x => x.Name).NotEmpty();
+            RuleForEach(x => x.Goals).SetValidator(x => new RegisterParticipantGoalCommandValidator());
         }
     }
 }
