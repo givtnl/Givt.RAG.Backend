@@ -12,6 +12,7 @@ namespace backend.business.Participants.Models
         public DateTime? StartDate { get; set; }
         public DateTime? FinishDate { get; set; }
         public decimal? DistanceInMeters { get; set; }
+        public string Status { get; set; }
 
     }
 }
