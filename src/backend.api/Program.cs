@@ -13,6 +13,10 @@ namespace backend
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureWebHost((host) =>
+                {
+                    host.ConfigureKestrel(x => x.AddServerHeader = false);
+                })
             .ConfigureAppConfiguration((hostBuilder, configBuilder) =>
             {
                 configBuilder.AddJsonFile("appsettings.json", true);
