@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using backend.business.Backers.Commands.Checkout;
 using backend.business.Backers.Commands.Register;
 using backend.business.Backers.Models;
 using backend.business.Backers.Queries.GetDetail;
@@ -47,6 +48,5 @@ namespace backend.Controllers
             var createdBacker = await _mediatr.Send(command, cancellationToken);
             return CreatedAtAction(nameof(Get), new { eventId, participantId, createdBacker.Id }, createdBacker);
         }
-
     }
 }
