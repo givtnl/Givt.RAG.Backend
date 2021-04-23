@@ -13,13 +13,13 @@ namespace backend.business.Participants.Commands.Register
     {
         public RegisterParticipantCommand()
         {
-            Goals = new List<RegisterParticipantGoalCommand>();
+            Targets = new List<RegisterEventTargetCommand>();
         }
         [NotNull]
         [JsonSchemaIgnore]
         public string EventId { get; set; }
         [NotNull]
         public string Name { get; set; }
-        public List<RegisterParticipantGoalCommand> Goals { get; set; }
+        public List<RegisterEventTargetCommand> Targets { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace backend.domain
 {
-    public enum ParticipantGoalType
+    public enum EventTargetType
     {
         DonationAmount,
         Distance,

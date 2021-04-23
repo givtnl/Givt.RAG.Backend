@@ -10,7 +10,7 @@ namespace backend.domain
     {
         public Participant()
         {
-            Goals = new List<ParticipantGoal>();
+            Targets = new List<EventTarget>();
         }
 
         [DynamoDBHashKey]
@@ -24,6 +24,6 @@ namespace backend.domain
         [DynamoDBProperty(typeof(DynamoNullableDateTimeConverter))]
         public DateTime? FinishDate { get; set; }
         public decimal? DistanceInMeters { get; set; }
-        public List<ParticipantGoal> Goals { get; set; }
+        public List<EventTarget> Targets { get; set; }
     }
 }

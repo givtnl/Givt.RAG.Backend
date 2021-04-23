@@ -23,8 +23,8 @@ namespace backend.business.Participants.Mappers
             CreateMap<Participant, ParticipantDetailModel>()
                 .ForMember(x => x.Id, c => c.MapFrom(d => d.Id.Split("-", StringSplitOptions.RemoveEmptyEntries)[1]));
 
-            CreateMap<RegisterParticipantGoalCommand, ParticipantGoal>(MemberList.Source);
-            CreateMap<ParticipantGoal, ParticipantGoalDetailModel>(MemberList.Source);
+            CreateMap<RegisterEventTargetCommand, EventTarget>(MemberList.Source);
+            CreateMap<EventTarget, EventTargetDetailModel>(MemberList.Source);
         }
     }
 }

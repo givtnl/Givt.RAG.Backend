@@ -2,9 +2,9 @@
 
 namespace backend.business.Participants.Commands.Register
 {
-    public class RegisterParticipantGoalCommandValidator : AbstractValidator<RegisterParticipantGoalCommand>
+    public class RegisterEventTargetCommandValidator : AbstractValidator<RegisterEventTargetCommand>
     {
-        public RegisterParticipantGoalCommandValidator()
+        public RegisterEventTargetCommandValidator()
         {
             RuleFor(x => x.Value).NotEmpty();
         }

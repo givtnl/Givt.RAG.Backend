@@ -3,13 +3,13 @@ using NJsonSchema.Annotations;
 
 namespace backend.business.Participants.Commands.Register
 {
-    public class RegisterParticipantGoalCommand
+    public class RegisterEventTargetCommand
     {
         /// <summary>
         /// Either DonationAmount, Distance or Time
         /// </summary>
         [NotNull]
-        public ParticipantGoalType Type { get; set; }
+        public EventTargetType Type { get; set; }
         [NotNull]
         public string Value { get; set; }
     }

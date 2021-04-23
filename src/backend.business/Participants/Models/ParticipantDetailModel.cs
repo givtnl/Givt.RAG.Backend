@@ -8,7 +8,7 @@ namespace backend.business.Participants.Models
     {
         public ParticipantDetailModel()
         {
-            Goals = new List<ParticipantGoalDetailModel>();
+            Targets = new List<EventTargetDetailModel>();
         }
         [NotNull]
         public string Id { get; set; }
@@ -18,6 +18,6 @@ namespace backend.business.Participants.Models
         public DateTime? FinishDate { get; set; }
         public decimal? DistanceInMeters { get; set; }
         public string Status { get; set; }
-        public List<ParticipantGoalDetailModel> Goals { get; set; }
+        public List<EventTargetDetailModel> Targets { get; set; }
     }
 }
