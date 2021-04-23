@@ -25,19 +25,19 @@ namespace backend.Controllers
             _mediatr = mediatr;
         }
         [HttpGet]
-        [OpenApiOperation( "GetBackersList")]
+        [OpenApiOperation( "GetBackersList", "Returns a list of backers", "Returns the backers for a given parcipant for a given event")]
         public Task<IEnumerable<BackerListModel>> Get([NotNull]string eventId, [NotNull] string participantId, CancellationToken cancellationToken)
         {
             return _mediatr.Send(new GetBackersListQuery { EventId = eventId, ParticipantId = participantId }, cancellationToken);
         }
         [HttpGet("{id}")]
-        [OpenApiOperation("GetBackerDetail")]
+        [OpenApiOperation("GetBackerDetail", "Returns a detail of a single backer", "Returns the backer identified by the id path parameter")]
         public Task<BackerDetailModel> Get([NotNull] string eventId, [NotNull] string participantId, [NotNull] string id, CancellationToken cancellationToken)
         {
             return _mediatr.Send(new GetBackerDetailQuery { ParticipantId = participantId, EventId = eventId, Id = id }, cancellationToken);
         }
         [HttpPost]
-        [OpenApiOperation("RegisterBacker")]
+        [OpenApiOperation("RegisterBacker", "Registers a new backer for a given participant", "Registers a new backer who is backing the giving participant who participates in an given event")]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(BackerDetailModel))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ExceptionModel))]
         public async Task<IActionResult> Post([NotNull] string eventId, [NotNull] string participantId, [FromBody] RegisterBackerCommand command, CancellationToken cancellationToken)

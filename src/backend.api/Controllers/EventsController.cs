@@ -22,14 +22,14 @@ namespace backend.Controllers
             _mediatr = mediatr;
         }
         [HttpGet]
-        [OpenApiOperation("GetEventsList")]
+        [OpenApiOperation("GetEventsList", "Returns a list of all events", "Returns all available events to participate in")]
         public Task<IEnumerable<EventListModel>> Get(CancellationToken cancellationToken)
         {
             return _mediatr.Send(new GetEventsListQuery(), cancellationToken);
         }
 
         [HttpGet("{id}")]
-        [OpenApiOperation("GetEventDetail")]
+        [OpenApiOperation("GetEventDetail", "Returns a detail of a single event","Returns the event identified by the id path parameter")]
         public Task<EventDetailModel> Get([NotNull] string id, CancellationToken cancellationToken)
         {
             return _mediatr.Send(new GetEventDetailQuery {Id = id}, cancellationToken);

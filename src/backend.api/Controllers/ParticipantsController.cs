@@ -30,13 +30,13 @@ namespace backend.Controllers
             _mediatr = mediatr;
         }
         [HttpGet]
-        [OpenApiOperation("GetParticipantsList")]
+        [OpenApiOperation("GetParticipantsList", "Returns a list of participants", "Returns the participants for a given event")]
         public Task<IEnumerable<ParticipantListModel>> Get([NotNull] string eventId, CancellationToken cancellationToken)
         {
             return _mediatr.Send(new GetParticipantsListQuery { EventId = eventId }, cancellationToken);
         }
         [HttpPost]
-        [OpenApiOperation("RegisterParticipant")]
+        [OpenApiOperation("RegisterParticipant", "Registers a new participant for a given event", "Registers a new participant who participates in the given event")]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ParticipantDetailModel))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ExceptionModel))]
         public async Task<IActionResult> Post([NotNull] string eventId, [FromBody] RegisterParticipantCommand command, CancellationToken cancellationToken)
@@ -47,14 +47,14 @@ namespace backend.Controllers
         }
 
         [HttpGet("{id}")]
-        [OpenApiOperation("GetParticipantDetail")]
+        [OpenApiOperation("GetParticipantDetail", "Returns a detail of a single participant", "Returns the participant identified by the id path parameter")]
         public Task<ParticipantDetailModel> Get([NotNull] string eventId, string id, CancellationToken cancellationToken)
         {
             return _mediatr.Send(new GetParticipantDetailQuery { EventId = eventId, Id = id }, cancellationToken);
         }
 
         [HttpPatch("{id}/start")]
-        [OpenApiOperation("StartEventForParticipant")]
+        [OpenApiOperation("StartEventForParticipant", "Marks a given participation in an event as Started", "Marks the given participant for the given event as Started so backers can be notified of the new status")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ExceptionModel))]
         public async Task<IActionResult> Start([NotNull] string eventId, [NotNull] string id, CancellationToken cancellationToken)
@@ -64,7 +64,7 @@ namespace backend.Controllers
         }
 
         [HttpPatch("{id}/finish")]
-        [OpenApiOperation("FinishEventForParticipant", "Updates the status for a given participant for a given event to Finished")]
+        [OpenApiOperation("FinishEventForParticipant", "Marks a given participation in an event as Finished", "Marks the given participant for the given event as Finished so backers can be notified of the new status")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ExceptionModel))]
         public async Task<IActionResult> Finish([NotNull] string eventId, [NotNull] string id,[FromBody] FinishParticipantCommand command, CancellationToken cancellationToken)
