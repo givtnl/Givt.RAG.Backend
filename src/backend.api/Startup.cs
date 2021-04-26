@@ -50,10 +50,10 @@ namespace backend
                 options.GenerateEnumMappingDescription = true;
                 options.Title = "Gehaktaton API";
                 options.AllowNullableBodyParameters = false;
+                options.Version = "1";
                 options.DocumentName = "v1";
                 options.PostProcess = document =>
                 {
-          
                     document.Produces = new List<string>
                     {
                         "application/json"
@@ -75,7 +75,10 @@ namespace backend
             {
                 app.UseDeveloperExceptionPage();
                 app.UseOpenApi();
-                app.UseSwaggerUi3();
+                app.UseSwaggerUi3(x =>
+                {
+                    x.AdditionalSettings["displayOperationId"] = true;
+                });
             }
 
             app.UseRouting()
