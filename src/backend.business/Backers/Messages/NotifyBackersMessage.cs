@@ -13,6 +13,7 @@ namespace backend.business.Backers.Messages
         public NotifyBackersMessageDistance Distance { get; set; }
         public NotifyBackersMessageDuration Duration { get; set; }
         public decimal TotalAmount => decimal.Round(Distance.Kilometers * Backer.Amount,2);
+        public decimal Pace => decimal.Round((decimal)Duration.Minutes / Distance.Kilometers, 2);
     }
 
     public class NotifyBackersMessageDistance
