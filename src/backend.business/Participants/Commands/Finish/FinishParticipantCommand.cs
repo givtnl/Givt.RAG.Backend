@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using System;
+using MediatR;
 using NJsonSchema.Annotations;
 
 namespace backend.business.Participants.Commands.Finish
@@ -17,5 +18,7 @@ namespace backend.business.Participants.Commands.Finish
         public string ParticipantId { get; set; }
         [NotNull]
         public decimal DistanceInMeters { get; set; }
+        [NotNull]
+        public DateTime FinishDate { get; set; }
     }
 }

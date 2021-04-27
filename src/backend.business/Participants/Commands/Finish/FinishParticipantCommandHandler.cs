@@ -31,8 +31,11 @@ namespace backend.business.Participants.Commands.Finish
             if (participant.Status == ParticipantStatus.Finished)
                 throw new ValidationException(nameof(Participant.Status), $"Wrong desired status ({ParticipantStatus.Finished})");
 
+            if (participant.StartDate.HasValue && participant.StartDate.Value > request.FinishDate)
+                throw new ValidationException(nameof(Participant.FinishDate), $"Finish date should be smaller than the start date");
+
             participant.Status = ParticipantStatus.Finished;
-            participant.FinishDate = DateTime.UtcNow;
+            participant.FinishDate = request.FinishDate;
             participant.DistanceInMeters = request.DistanceInMeters;
 
             await context.SaveAsync(participant, cancellationToken);

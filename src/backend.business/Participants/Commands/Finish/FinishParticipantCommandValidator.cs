@@ -9,6 +9,7 @@ namespace backend.business.Participants.Commands.Finish
             RuleFor(x => x.EventId).NotEmpty();
             RuleFor(x => x.ParticipantId).NotEmpty();
             RuleFor(x => x.DistanceInMeters).GreaterThan(0);
+            RuleFor(x => x.FinishDate).NotEmpty();
         }
     }
 }
