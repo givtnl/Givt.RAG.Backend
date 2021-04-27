@@ -1,5 +1,6 @@
 ﻿using Amazon.CDK;
 using Amazon.CDK.AWS.DynamoDB;
+using Amazon.CDK.AWS.S3;
 using Amazon.CDK.AWS.SQS;
 
 namespace backend.infrastructure.aws
@@ -19,11 +20,25 @@ namespace backend.infrastructure.aws
 
 
             Props = props;
+            CreateS3Bucket(environmentName.ValueAsString);
             CreateEventsTable(environmentName.ValueAsString);
             CreateParticipantsTable(environmentName.ValueAsString);
             CreateBackersTable(environmentName.ValueAsString);
 
             CreateBackerNotifyParticipantFinishedQueue(environmentName.ValueAsString);
+        }
+
+        private void CreateS3Bucket(string environmentNameValueAsString)
+        {
+            new Bucket(this, "attachmentsbucket", new BucketProps
+            {
+                AccessControl = BucketAccessControl.PRIVATE,
+                BlockPublicAccess = BlockPublicAccess.BLOCK_ALL,
+                Encryption = BucketEncryption.S3_MANAGED,
+                EnforceSSL = true,
+                Versioned = true,
+                PublicReadAccess = false
+            });
         }
 
         private void CreateBackerNotifyParticipantFinishedQueue(string environmentName)
@@ -72,8 +87,8 @@ namespace backend.infrastructure.aws
                 Encryption = TableEncryption.DEFAULT,
                 RemovalPolicy = RemovalPolicy.DESTROY,
                 TableName = $"{environmentName}Events",
-                PartitionKey = new Attribute {Name = "DomainType", Type = AttributeType.STRING},
-                SortKey = new Attribute {Name = "Id", Type = AttributeType.STRING}
+                PartitionKey = new Attribute { Name = "DomainType", Type = AttributeType.STRING },
+                SortKey = new Attribute { Name = "Id", Type = AttributeType.STRING }
             });
         }
     }
