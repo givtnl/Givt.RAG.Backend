@@ -57,10 +57,7 @@ namespace backend.business.AttachmentsController.Queries.GetDetail
                 {
                     BucketName = _settings.BucketName,
                     Key = key,
-                    Verb = HttpVerb.GET,
-                    ContentType = "image/jpeg",
                     Expires = DateTime.UtcNow.AddDays(1),
-
                 }),
                 DownloadUrlValidTill = DateTime.UtcNow.AddDays(1)
             };
