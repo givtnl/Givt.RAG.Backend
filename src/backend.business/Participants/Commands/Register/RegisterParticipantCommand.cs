@@ -20,6 +20,7 @@ namespace backend.business.Participants.Commands.Register
         public string EventId { get; set; }
         [NotNull]
         public string Name { get; set; }
+        public string EntryNumber { get; set; }
         public List<RegisterEventTargetCommand> Targets { get; set; }
     }
 }

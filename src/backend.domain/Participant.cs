@@ -18,6 +18,7 @@ namespace backend.domain
         [DynamoDBRangeKey]
         public string Id { get; set; }
         public string Name { get; set; }
+        public string EntryNumber { get; set; }
         public string Status { get; set; }
         [DynamoDBProperty(typeof(DynamoNullableDateTimeConverter))]
         public DateTime? StartDate { get; set; }

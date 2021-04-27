@@ -60,7 +60,7 @@ namespace backend
                     };
                 };
             });
-            services.AddCors(o => o.AddPolicy("EnableAll", builder =>
+            services.AddCors(o => o.AddDefaultPolicy(builder =>
             {
                 builder.AllowAnyHeader()
                         .AllowAnyMethod()
@@ -81,9 +81,9 @@ namespace backend
                 });
             }
 
-            app.UseRouting()
-                .UseCors("EnableAll")
-                .UseAuthorization();
+            app.UseRouting();
+
+            app.UseCors().UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
