@@ -25,6 +25,7 @@ namespace backend.business.Backers.Commands.Checkout
                 Description = request.Description,
                 Amount = new Amount(request.Currency, request.TotalAmount),
                 RedirectUrl = request.RedirectUrl,
+                Locale = request.Locale,
                 WebhookUrl = "https://google.be"
             }, true);
 

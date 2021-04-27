@@ -23,5 +23,6 @@ namespace backend.business.Backers.Commands.Checkout
         public string Description { get; set; }
 
         public string RedirectUrl { get; set; }
+        public string Locale { get; set; }
     }
 }
