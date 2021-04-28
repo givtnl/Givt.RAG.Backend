@@ -13,6 +13,8 @@ namespace backend.business.Events.Models
         [NotNull]
         public DateTime StartDate { get; set; }
         [NotNull]
+        public DateTime EndDate { get; set; }
+        [NotNull]
         public string City { get; set; }
     }
 }
