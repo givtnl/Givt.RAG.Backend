@@ -47,7 +47,6 @@ namespace backend.business.AttachmentsController.Queries.GetDetail
                     BucketName = _settings.BucketName,
                     Key = key,
                     Verb = HttpVerb.PUT,
-                    ContentType = "image/jpeg",
                     Expires = DateTime.UtcNow.AddMinutes(15),
                     
                 }),
